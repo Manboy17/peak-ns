@@ -37,7 +37,9 @@ export const CountDown = ({ onPeakTimeChange }: CountDownProps) => {
   return (
     <div>
       <span>
-        {timeLeft.hours}:{timeLeft.minutes}:{timeLeft.seconds}
+        {timeLeft.hours}:
+        {timeLeft.minutes < 10 ? `0${timeLeft.minutes}` : timeLeft.minutes}:
+        {timeLeft.seconds < 10 ? `0${timeLeft.seconds}` : timeLeft.seconds}
       </span>
     </div>
   );
