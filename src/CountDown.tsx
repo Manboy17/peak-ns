@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { calculatePeak } from "./calculatePeak";
 
 interface CountDownProps {
+  isPeakTime: boolean;
   onPeakTimeChange: (value: boolean) => void;
 }
 
-export const CountDown = ({ onPeakTimeChange }: CountDownProps) => {
+export const CountDown = ({ isPeakTime, onPeakTimeChange }: CountDownProps) => {
   const [timeLeft, setTimeLeft] = useState({
     hours: 0,
     minutes: 0,
@@ -16,7 +17,8 @@ export const CountDown = ({ onPeakTimeChange }: CountDownProps) => {
     const calculateTimeLeft = () => {
       const currentTime = new Date();
 
-      const { isPeakTime, nextChangeAt: nextPeakTime } = calculatePeak();
+      const { isPeakTime, nextChangeAt: nextPeakTime } =
+        calculatePeak(currentTime);
 
       onPeakTimeChange(isPeakTime);
 
@@ -36,7 +38,7 @@ export const CountDown = ({ onPeakTimeChange }: CountDownProps) => {
   }, [onPeakTimeChange]);
   return (
     <div>
-      <span>
+      <span className={`${isPeakTime ? "text-[#FFC917]" : "text-[#003082]"}`}>
         {timeLeft.hours}:
         {timeLeft.minutes < 10 ? `0${timeLeft.minutes}` : timeLeft.minutes}:
         {timeLeft.seconds < 10 ? `0${timeLeft.seconds}` : timeLeft.seconds}
@@ -44,5 +46,3 @@ export const CountDown = ({ onPeakTimeChange }: CountDownProps) => {
     </div>
   );
 };
-
-// off-peak before 6.30am, between 9.00am and 4pm and after 6pm
