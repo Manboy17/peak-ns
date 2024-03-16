@@ -55,7 +55,7 @@ test("calculatePeak test5", () => {
   const { isPeakTime, nextChangeAt } = calculatePeak(testDate);
 
   expect(isPeakTime).toBe(false);
-const expectedNextChangeAt = new Date("2024-03-11T06:30:00");
+  const expectedNextChangeAt = new Date("2024-03-11T06:30:00");
   expect(nextChangeAt).toEqual(expectedNextChangeAt);
 });
 
@@ -67,6 +67,18 @@ test("calculatePeak thursday evening", () => {
   expect(isPeakTime).toBe(false);
 
   const expectedNextChangeAt = new Date("2024-03-08T06:30:00");
+
+  expect(nextChangeAt).toEqual(expectedNextChangeAt);
+});
+
+test("calculatePeak extra test", () => {
+  const testDate = new Date("2024-03-16T20:00:00");
+
+  const { isPeakTime, nextChangeAt } = calculatePeak(testDate);
+
+  expect(isPeakTime).toBe(false);
+
+  const expectedNextChangeAt = new Date("2024-03-18T06:30:00");
 
   expect(nextChangeAt).toEqual(expectedNextChangeAt);
 });

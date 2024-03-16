@@ -23,8 +23,10 @@ export const CountDown = ({ isPeakTime, onPeakTimeChange }: CountDownProps) => {
       onPeakTimeChange(isPeakTime);
 
       const difference = nextPeakTime.getTime() - currentTime.getTime();
+      const daysDifference = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hoursDifference = Math.floor((difference / (1000 * 60 * 60)) % 24);
       setTimeLeft({
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        hours: daysDifference * 24 + hoursDifference,
         minutes: Math.floor((difference / 1000 / 60) % 60),
         seconds: Math.floor((difference / 1000) % 60),
       });
